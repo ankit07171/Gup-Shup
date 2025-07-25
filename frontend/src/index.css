@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+body {
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("https://getwallpapers.com/wallpaper/full/2/2/e/904536-cool-awesome-backgrounds-1920x1080-for-full-hd.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
