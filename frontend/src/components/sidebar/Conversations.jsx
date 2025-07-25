@@ -20,17 +20,4 @@ const Conversations = () => {
 	);
 };
 export default Conversations;
-
-// // STARTER CODE SNIPPET
-// import Conver  from "./Conversation";
-
-// const Conversations = () => {
-// 	return (
-		// <div className='py-2 flex flex-col flex-wrap overflow-auto'>
-// 			<Conver  />
-// 			<Conver  />
-// 			<Conver /> 
-// 		</div>
-// 	);
-// };
-// export default Conversations;
+ 

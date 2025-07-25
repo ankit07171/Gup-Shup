@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { IoSearchSharp } from "react-icons/io5";
+import { Search } from "lucide-react";
+
 import useConversation from "../../zustand/useConversation";
 import useGetConversations from "../../hooks/useGetConversations";
 import toast from "react-hot-toast";
@@ -12,8 +13,8 @@ const SearchInput = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (!search) return;
-		if (search.length < 3) {
-			return toast.error("Search term must be at least 3 characters long");
+		if (search.length < 2) {
+			return toast.error("Search term must be at least 2 characters long");
 		}
 
 		const conversation = conversations.find((c) => c.fullName.toLowerCase().includes(search.toLowerCase()));
@@ -33,7 +34,7 @@ const SearchInput = () => {
 				onChange={(e) => setSearch(e.target.value)}
 			/>
 			<button type='submit' className='btn btn-circle bg-sky-500 text-white'>
-				<IoSearchSharp className='w-6 h-6 outline-none' />
+				<Search className='w-6 h-6 outline-none' />
 			</button>
 		</form>
 	);

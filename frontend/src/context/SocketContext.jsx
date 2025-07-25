@@ -13,22 +13,28 @@ export const SocketContextProvider = ({ children }) => {
 	const [onlineUsers, setOnlineUsers] = useState([]);
 	const { authUser } = useAuthContext();
 
-	useEffect(() => {
-	if (!authUser?._id) return;  
-	const socket = io("http://localhost:1145", {
-		query: {
-			userId: authUser._id,
-		},
-	});
+useEffect(() => {
+  if (!authUser?._id) return;
 
-	setSocket(socket);
+  const socket = io("http://localhost:1145", {
+    query: {
+      userId: authUser._id,
+    },
+  });
 
-	socket.on("getOnlineUsers", (users) => {
-		setOnlineUsers(users);
-	});
+  setSocket(socket);
 
-	return () => socket.close();
+  socket.on("getOnlineUsers", (users) => {
+    setOnlineUsers(users);
+  }); 
+
+  return () => socket.disconnect();
 }, [authUser]);
 
-	return <SocketContext.Provider value={{ socket, onlineUsers }}>{children}</SocketContext.Provider>;
-};
+return (
+  <SocketContext.Provider value={{ socket, onlineUsers }}>
+    {children}
+  </SocketContext.Provider>
+);
+}
+

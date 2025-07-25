@@ -6,27 +6,38 @@ export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
-  const [loading, setLoading] = useState(true); // optional: to wait for user to load
-
+  const [loading, setLoading] = useState(true);
+ 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("/api/auth/me", {withCredentials: true, // ✅ IMPORTANT for cookies
-        });
-        setAuthUser(res.data.user);
-      } catch (err) {
-        console.error("Not logged in or error:", err.response?.data?.error || err.message);
+        const res = await axios.get("/api/auth/me", { withCredentials: true });
+        setAuthUser(res.data);
+        console.log(res.data.user,"======");
+        
+      } catch (error) {
         setAuthUser(null);
       } finally {
         setLoading(false);
       }
     };
-
     fetchUser();
   }, []);
 
+  
+  const logout = async () => {
+    try {
+      await axios.post("/api/auth/logout", {}, { withCredentials: true });
+      setAuthUser(null);
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+  };
+
+  if (loading) return <h1 className="text-white text-center mt-20">Loading...</h1>;
+
   return (
-    <AuthContext.Provider value={{ authUser, setAuthUser, loading }}>
+    <AuthContext.Provider value={{ authUser, setAuthUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

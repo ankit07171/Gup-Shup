@@ -101,10 +101,13 @@ export const login = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 export const logout = (req, res) => {
 	try {
-		res.cookie("jwt", "", { maxAge: 0 });
+		res.clearCookie("jwt", {
+			httpOnly: true,
+			sameSite: "Lax", // or "None" if you're using cross-origin
+			secure: process.env.NODE_ENV, // true in production (HTTPS)
+		});
 		res.status(200).json({ message: "Logged out successfully" });
 	} catch (error) {
 		console.log("Error in logout controller", error.message);
@@ -112,9 +115,10 @@ export const logout = (req, res) => {
 	}
 };
 
+
 export const getMe = async (req, res) => {
 	try {
-		const user = req.user; // already fetched by protectRoute
+		const user = req.user; 
 		res.status(200).json({ user });
 	} catch (err) {
 		console.error("Error in /me route:", err.message);
