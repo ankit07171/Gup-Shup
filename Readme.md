@@ -36,23 +36,16 @@ NODE_ENV= < development >
 
 
 📦 Installation & Running
-1️⃣ Clone the repo
-bash
-Copy
-Edit
+1️⃣ Clone the repo 
 git clone https://github.com/your-username/mern-chat-app.git
 cd mern-chat-app
-2️⃣ Install backend
-bash
-Copy
-Edit
+
+2️⃣ Install backend 
 cd backend
 npm install
 npm run dev
-3️⃣ Install frontend
-bash
-Copy
-Edit
+
+3️⃣ Install frontend 
 cd ../frontend
 npm install
 npm run dev
